@@ -3,24 +3,23 @@ import java.io.File;
 public class Main {
 
     public static void main(String args[]) {
-        File carpeta = new File("C:\\Users\\dimat\\eclipse-workspace\\BookMap");
-        // File carpeta = new File(".");
-        if (!carpeta.exists()) {
-            System.out.println(args[0] + " NO file.");
+        File file = new File("C:\\Users\\dimat\\eclipse-workspace\\BookMap");
+        if (!file.exists()) {
+            System.out.println(args[0] + " No file.");
             return;
         }
-        imprimeArbol(carpeta, "");
+        PrintCatalog(file, "");
     }
 
-    public static void imprimeArbol(File carpeta, String tabulador) {
-        File contenido[] = carpeta.listFiles();
-        if (contenido != null) {
-            for (int i = 0; i < contenido.length; i++)
-                if (contenido[i].isDirectory()) {
-                    System.out.println(tabulador + "|-" + contenido[i].getName());
-                    imprimeArbol(contenido[i], tabulador + "|  ");
+    public static void PrintCatalog(File file, String tabulation) {
+        File content[] = file.listFiles();
+        if (content != null) {
+            for (int i = 0; i < content.length; i++)
+                if (content[i].isDirectory()) {
+                    System.out.println(tabulation + "|-" + content[i].getName());
+                    PrintCatalog(content[i], tabulation + "|  ");
                 } else {
-                    System.out.println(tabulador + "+-" + contenido[i].getName().toString());
+                    System.out.println(tabulation + "+-" + content[i].getName().toString());
                 }
         }
     }
